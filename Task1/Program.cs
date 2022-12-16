@@ -6,12 +6,22 @@ Console.WriteLine("Антонкин Антон | Группа Разработч
 Console.WriteLine(" ");
 Console.WriteLine("Программа показывает большее из двух чисел");
 Console.WriteLine(" ");
+int num1;
+int num2;
+try 
+{
 Console.WriteLine("Введите первое число:");
-
-int num1 = int.Parse(Console.ReadLine());
+ num1 = int.Parse(Console.ReadLine());
 Console.WriteLine(" ");
 Console.WriteLine("Введите второе число:");
-int num2 = int.Parse(Console.ReadLine());
+ num2 = int.Parse(Console.ReadLine());
+}
+catch 
+{
+    Console.WriteLine("Вы втираете какую-то дичь. Прощайте!");
+    Console.ReadKey();
+    return;
+}
 Console.WriteLine(" ");
 if (num1 > num2)
 {
