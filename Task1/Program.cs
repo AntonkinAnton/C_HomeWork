@@ -8,15 +8,15 @@ do
 {
     Console.Clear();
     Console.WriteLine("Антонкин Антон | Группа Разработчик 3776 | GeekBrains");
-    Console.WriteLine(" ");
+    Console.WriteLine();
     Console.WriteLine("Программа показывает большее из двух чисел");
-    Console.WriteLine(" ");
+    Console.WriteLine();
 
     try
     {
         Console.WriteLine("Введите первое число:");
         num1 = int.Parse(Console.ReadLine());
-        Console.WriteLine(" ");
+        Console.WriteLine();
         Console.WriteLine("Введите второе число:");
         num2 = int.Parse(Console.ReadLine());
     }
@@ -26,7 +26,7 @@ do
         Console.ReadKey();
         return;
     }
-    Console.WriteLine(" ");
+    Console.WriteLine();
     if (num1 > num2)
     {
         Console.WriteLine("Число {0} больше", num1);
@@ -42,7 +42,7 @@ do
     bool agree = false;
     do
     {
-        Console.WriteLine(" ");
+        Console.WriteLine();
         Console.WriteLine("Еще разок? (Y/N)");
         string again = Console.ReadLine();
         if (again.ToLower() == "y")
@@ -58,5 +58,5 @@ do
     }
     while (agree == false);
 
-    Console.WriteLine(" ");
+    Console.WriteLine();
 } while (exit == false);
