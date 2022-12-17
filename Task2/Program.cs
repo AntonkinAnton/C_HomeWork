@@ -10,17 +10,52 @@ Console.WriteLine();
 
 int[] array = new int[1];
 int index = 0;
-
-Console.WriteLine("Введите первое число:");
-array[index] = int.Parse(Console.ReadLine());
-index++;
-Array.Resize(ref array, index + 1);
-Console.WriteLine("Введите второе число:");
-array[index] = int.Parse(Console.ReadLine());
-index++;
-Array.Resize(ref array, index + 1);
-Console.WriteLine("Введите третье число:");
-array[index] = int.Parse(Console.ReadLine());
+bool next = false;
+while (next == false)
+{
+    Console.WriteLine("Введите первое число:");
+    if (int.TryParse(Console.ReadLine(), out array[index]))
+    {
+        index++;
+        Array.Resize(ref array, index + 1);
+        next = true;
+    }
+    else
+    {
+        Console.WriteLine("Вы ввели не число ಠ_ಠ");
+        Console.WriteLine();
+    }
+}
+next = false;
+while (next == false)
+{
+    Console.WriteLine("Введите второе число:");
+    if (int.TryParse(Console.ReadLine(), out array[index]))
+    {
+        index++;
+        Array.Resize(ref array, index + 1);
+        next = true;
+    }
+    else
+    {
+        Console.WriteLine("Вы ввели не число ಠ_ಠ");
+        Console.WriteLine();
+    }
+}
+next = false;
+while (next == false)
+{
+    Console.WriteLine("Введите третье число:");
+    if (int.TryParse(Console.ReadLine(), out array[index]))
+    {
+        next = true;
+    }
+    else
+    {
+        Console.WriteLine("Вы ввели не число ಠ_ಠ");
+        Console.WriteLine();
+    }
+}
 
 Console.WriteLine("Введите следующее число, либо любой символ, чтобы завершить ввод:");
 
@@ -41,7 +76,7 @@ while (index < lenght)
     if (array[index] > max)
     {
         max = array[index];
-        maxind = index;     
+        maxind = index;
     }
     index++;
 }
@@ -50,8 +85,5 @@ Console.WriteLine("Массив: " + string.Join(", ", array));
 Console.WriteLine();
 Console.WriteLine("Наибольшее значение (и его индекс): " + max + "({0})", maxind);
 Console.WriteLine();
-
-
-
-
-
+Console.Write("Для выхода нажмите любую клавишу");
+Console.ReadKey();
