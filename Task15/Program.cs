@@ -23,10 +23,10 @@ int[] ArrayFill(int size)
             Console.SetCursorPosition(x, (Console.CursorTop - 1));
             System.Console.WriteLine("                ");
             Console.SetCursorPosition(x, (Console.CursorTop - 1));
-        }
-        x += (int)Math.Log10(array[i]) + 3;                  // для ввода в одну строку
-        if (i != array.Length - 1)
-        {
+        }                                                         // для ввода в одну строку
+        x += (int)Math.Log10(array[i]) + 3;                   // из-за такой проверки невозможно ввести отрицательные числа
+        if (i != array.Length - 1)                            // можно было добавить еще пару проверок, либо считать x через цикл.....
+        {                                                     // но как-нибудь потом....
             Console.SetCursorPosition(x - 2, (Console.CursorTop - 1));
             System.Console.WriteLine(',');
             Console.SetCursorPosition(x, (Console.CursorTop - 1));
