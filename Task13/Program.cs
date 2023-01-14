@@ -26,8 +26,8 @@ string ToUpperIndex(int degree)
 {
     string UpIndex = degree.ToString();
     string result = String.Empty;
-    for (int i = 0; i < UpIndex.Length; i++)
-    {
+    for (int i = 0; i < UpIndex.Length; i++)   //иногда нормально отображается верхний индекс, иногда "?". хз почему, терминал...
+    {                                          
         if (UpIndex[i] == '0') result += '⁰';
         if (UpIndex[i] == '1') result += '¹';
         if (UpIndex[i] == '2') result += '²';
