@@ -1,4 +1,5 @@
-﻿// Учитывая целочисленный массив, проверьте, содержит ли он подмассив с нулевой суммой
+﻿// Задача 41: Пользователь вводит с клавиатуры M чисел. Посчитайте, сколько чисел больше 0 ввёл пользователь.
+// 0, 7, 8, -2, -2 -> 2
 
 void Header(string about)
 {
@@ -7,79 +8,41 @@ void Header(string about)
     Console.WriteLine($"{about}\n");
 }
 
-int[] CreateArray(int size)
+string ListToString(List<int> myNum)
 {
-    int[] array = new int[size];
-    return array;
+    return string.Join(", ", myNum);
 }
 
-void FillArrayRndmWOnull(int[] array)
-{
-    Random rnd = new Random();
-    int randWOnull = 0;
-    for (int i = 0; i < array.Length; i++)
-    {
-        do
-            randWOnull = rnd.Next(-10, 11);
-        while (randWOnull == 0);
-        array[i] = randWOnull;
-    }
-}
-
-string ArrayToString(int[] array)
-{
-    return string.Join(", ", array);
-}
-
-void PrintArray(string message, string array1)
+void PrintList(string message, string array1)
 {
     System.Console.WriteLine($"\n{message}\n[{array1}]\n");
 }
 
-int GetNum(string message)
+void FillList(List<int> myList, string message)
 {
     int num;
-    do
+    System.Console.WriteLine(message);
+    while (int.TryParse(Console.ReadLine(), out num))
     {
-        System.Console.WriteLine(message);
-    } while (!int.TryParse(Console.ReadLine(), out num));
+        myList.Add(num);
+    }
 
-    return num;
 }
 
-void PrintSubarray(int[] array, int i, int j)
+void PosNegCount(List<int> myList)
 {
-    System.Console.Write("[");
-    for (; i <= j; i++)
+    int negCount = 0;
+    int posCount = 0;
+    int nulls = 0;
+    for (int i = 0; i < myList.Count; i++)
     {
-        System.Console.Write(array[i]);
-        if (i != j) System.Console.Write(", ");
+        if (myList[i] > 0) posCount++;
+        else if (myList[i] < 0) negCount++;
+        else if (myList[i] == 0) nulls++;
     }
-    System.Console.WriteLine("]");
-}
-
-void SubarrayNullSum(int[] array)
-{
-    int sum = 0;
-    bool avialibility = false;
-    System.Console.WriteLine("Подмассивы равные нулю:");
-
-    for (int i = 0; i < array.Length; i++)
-    {
-        sum = array[i];
-        for (int j = i + 1; j < array.Length; j++)
-        {
-            sum += array[j];
-            if (sum == 0)
-            {
-                PrintSubarray(array, i, j);
-                avialibility = true;
-            }
-        }
-    }
-    if (avialibility == false)
-        System.Console.WriteLine("Отсутствуют");
-    System.Console.WriteLine();
+    System.Console.WriteLine($"Колличество отрицательных чисел: {negCount}");
+    System.Console.WriteLine($"Колличество положительных чисел: {posCount}");
+    System.Console.WriteLine($"Колличество нулей: {nulls}\n\n\n");
 }
 
 void SetFontColor(int clr)
@@ -180,18 +143,18 @@ void End()
 }
 
 
-Header("Программа показывает подмассивы с нулевой суммой");
+Header("Программа показывает сколько Вы ввели отрицательных и положительных чисел");
 
-int size = GetNum("Введите размер массива:");
+List<int> myList = new List<int>();
 
-int[] array = CreateArray(size);
+FillList(myList, "Введите числа. По окончанию нажмите Enter, либо введите не цифры:");
 
-FillArrayRndmWOnull(array);
+string List = ListToString(myList);
 
-PrintArray("Ваш массив:", ArrayToString(array));
+PrintList("Вы ввели:", List);
 
-SubarrayNullSum(array);
+PosNegCount(myList);
 
-RunningString("Press any key to terminate...", 80);
+RunningString("Нажмите любую клавишу, чтобы выйти...", 70);
 
 End();

@@ -1,85 +1,53 @@
-﻿// Учитывая целочисленный массив, проверьте, содержит ли он подмассив с нулевой суммой
+﻿// Напишите программу, которая найдёт точку пересечения двух прямых, заданных уравнениями
+//  y = k1 * x + b1, y = k2 * x + b2; значения b1, k1, b2 и k2 задаются пользователем.
+
+// b1 = 2, k1 = 5, b2 = 4, k2 = 9 -> (-0,5; -0,5)
 
 void Header(string about)
 {
     Console.Clear();
     Console.WriteLine("Антонкин Антон | Группа Разработчик 3776 | GeekBrains \n");
-    Console.WriteLine($"{about}\n");
+    Console.WriteLine($"{about}");
 }
 
-int[] CreateArray(int size)
+double GetNum(string message)
 {
-    int[] array = new int[size];
-    return array;
-}
-
-void FillArrayRndmWOnull(int[] array)
-{
-    Random rnd = new Random();
-    int randWOnull = 0;
-    for (int i = 0; i < array.Length; i++)
-    {
-        do
-            randWOnull = rnd.Next(-10, 11);
-        while (randWOnull == 0);
-        array[i] = randWOnull;
-    }
-}
-
-string ArrayToString(int[] array)
-{
-    return string.Join(", ", array);
-}
-
-void PrintArray(string message, string array1)
-{
-    System.Console.WriteLine($"\n{message}\n[{array1}]\n");
-}
-
-int GetNum(string message)
-{
-    int num;
+    double num;
     do
     {
-        System.Console.WriteLine(message);
-    } while (!int.TryParse(Console.ReadLine(), out num));
+        System.Console.Write(message + " ");
+    } while (!double.TryParse(Console.ReadLine(), out num));
 
     return num;
 }
 
-void PrintSubarray(int[] array, int i, int j)
+(double k, double b) GetStraight(string message)
+
 {
-    System.Console.Write("[");
-    for (; i <= j; i++)
-    {
-        System.Console.Write(array[i]);
-        if (i != j) System.Console.Write(", ");
-    }
-    System.Console.WriteLine("]");
+    System.Console.WriteLine("\n" + message + "\n");
+
+
+    double k = GetNum("k:");
+    double b = GetNum("b:");
+    return (k, b);
 }
 
-void SubarrayNullSum(int[] array)
+void PointOfCross((double k, double b) point1, (double k, double b) point2)
 {
-    int sum = 0;
-    bool avialibility = false;
-    System.Console.WriteLine("Подмассивы равные нулю:");
+    double x = (point1.b - point2.b) / (point2.k - point1.k);
+    double y = point1.k * x + point1.b;
 
-    for (int i = 0; i < array.Length; i++)
+    if (point1.k == point2.k)
     {
-        sum = array[i];
-        for (int j = i + 1; j < array.Length; j++)
-        {
-            sum += array[j];
-            if (sum == 0)
-            {
-                PrintSubarray(array, i, j);
-                avialibility = true;
-            }
-        }
+        if (point1.b == -point2.b)
+            System.Console.WriteLine("\nПрямые параллельны");
+        else if (point1.b == point2.b)
+            System.Console.WriteLine("\nПрямые лежат на одной линии");
     }
-    if (avialibility == false)
-        System.Console.WriteLine("Отсутствуют");
-    System.Console.WriteLine();
+    else
+        System.Console.WriteLine($"\nТочка пересечения прямых: ({x}; {y})");
+
+    System.Console.WriteLine("\n\n");
 }
 
 void SetFontColor(int clr)
@@ -180,18 +148,16 @@ void End()
 }
 
 
-Header("Программа показывает подмассивы с нулевой суммой");
 
-int size = GetNum("Введите размер массива:");
+Header("Программа показывает точку пересечения двух прямых");
 
-int[] array = CreateArray(size);
+(double k, double b) Line1 = GetStraight("Введите точки первой прямой:");
 
-FillArrayRndmWOnull(array);
+(double k, double b) Line2 = GetStraight("Введите точки второй прямой:");
 
-PrintArray("Ваш массив:", ArrayToString(array));
+PointOfCross(Line1, Line2);
 
-SubarrayNullSum(array);
-
-RunningString("Press any key to terminate...", 80);
+RunningString("Нажмите любую клавишу, чтобы выйти...", 70);
 
 End();
+
