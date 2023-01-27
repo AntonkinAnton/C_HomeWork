@@ -21,8 +21,8 @@ int GetNum(string message)
 
 int[,] CreateArray(int rows, int columns)
 {
-    int[,] array = new int[rows, columns];
-    return array;
+    return new int[rows, columns];
+
 }
 
 void FillArray(int[,] matr)
@@ -39,35 +39,39 @@ void FillArray(int[,] matr)
 
 void PrintImage(int[,] array)
 {
- System.Console.WriteLine("\nВаш массив:");
+    System.Console.WriteLine("\nВаш массив:");
     for (int i = 0; i < array.GetLength(0); i++)
     {
         for (int j = 0; j < array.GetLength(1); j++)
         {
-            
-                System.Console.Write(array[i,j]);
-                if (j != array.GetLength(1)-1)
-                    System.Console.Write(", ");
+
+            System.Console.Write(array[i, j]);
+            if (j != array.GetLength(1) - 1)
+                System.Console.Write(", ");
         }
         System.Console.WriteLine();
     }
     System.Console.WriteLine();
 }
 
+void ChangeInArray(int[,] array, int raw, int col)
+{
+    int temp = array[raw, col];
+    array[raw, col] = array[raw, col + 1];
+    array[raw, col + 1] = temp;
+}
+
 void SortRowOfArrayFromLargest(int[,] array, int raw = 0)
 {
     if (raw == array.GetLength(0))
         return;
-    int temp;
     for (int i = 0; i < array.GetLength(1) - 1; i++)
     {
         for (int j = 0; j < array.GetLength(1) - 1; j++)
         {
             if (array[raw, j] < array[raw, j + 1])
             {
-                temp = array[raw, j];
-                array[raw, j] = array[raw, j + 1];
-                array[raw, j + 1] = temp;
+                ChangeInArray(array, raw, j);
             }
         }
     }
@@ -176,8 +180,8 @@ void End()
 
 Header("Программа сортирует каждый столбец матрицы от большего к меньшему");
 
-int rows = GetNum("rows");
-int col = GetNum("col");
+int rows = GetNum("Кол-во рядов:");
+int col = GetNum("Кол-во столбцов:");
 
 int[,] array2d = CreateArray(rows, col);
 FillArray(array2d);
@@ -186,6 +190,6 @@ PrintImage(array2d);
 SortRowOfArrayFromLargest(array2d);
 PrintImage(array2d);
 
-RunningString("Почему проктолога пригласили в IT? Потому что он тоже своего рода разработчик... Нажмите любую клавишу, чтобы выйти... ", 50);
+RunningString("Нажмите любую клавишу, чтобы выйти... ", 50);
 
 End();
