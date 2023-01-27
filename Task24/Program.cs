@@ -57,13 +57,6 @@ void PrintImage(int[,] array)
     System.Console.WriteLine();
 }
 
-void ChangeInArray(int[,] array, int raw, int col)
-{
-    int temp = array[raw, col];
-    array[raw, col] = array[raw, col + 1];
-    array[raw, col + 1] = temp;
-}
-
 List<int> RowSummIn2dArray(int[,] array, int sum = 0)
 {
     List<int> sumList = new List<int>();
